@@ -26,18 +26,27 @@ function printOutput(num) {
 //change from number to string
 // so it can have commas and also negative values
 function getFormattedNumber(num) {
-    if (num == "-") {
+    let n;
+    let numb = num.toString();
+    if (numb === "-") {
         return "";
     }
-    let n = Number(num);
-    let value = n.toLocaleString("en");
-    return value;
+    if (numb.includes(".")){
+        return numb;
+    }
+    else{
+        n = Number(numb);
+        n = n.toLocaleString("en");
+    }
+    return n;
 }
 
 //Replace Number with comma with empty string
 // eg: 4,999 will be replaced to 4999
 function reverseNumberFormat(num) {
-    return Number(num.replace(/,/g, ""));
+    if(num == ".")
+        return num;
+    return num.replace(/,/g, "");
 }
 // Get all numbers
 function getNumbers() {
@@ -84,8 +93,7 @@ function operatorCalculation() {
                 //if output is not empty history might be empty//
                 if (output != "" || history != "") {
                     //conditional statement//
-                    output =
-                        output === "" ? output : reverseNumberFormat(output);
+                    output = output === "" ? output : reverseNumberFormat(output);
                     if (history === "0") history = "";
                     history = history + output;
                     if (this.id == "=") {
