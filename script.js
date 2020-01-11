@@ -55,3 +55,55 @@ function getNumbers() {
         });
     }
 }
+
+//Calculation from Operators class
+function operatorCalculation() {
+    let operator = document.getElementsByClassName("operator");
+    for (let i = 0; i < operator.length; i++) {
+        operator[i].addEventListener("click", function() {
+            //bring clear and backspace operators to function //
+            if (this.id === "clear") {
+                printHistory("");
+                printOutput("");
+            } else if (this.id === "backspace") {
+                let output = reverseNumberFormat(getOutput()).toString();
+                if (output) {
+                    //if output has a value
+                    output = output.substr(0, output.length - 1);
+                    printOutput(output);
+                }
+            } else {
+                let output = getOutput();
+                let history = getHistory();
+                //if output is empty history might not be empty//
+                if (output === "" && history != "") {
+                    if (isNaN(history[history.length - 1])) {
+                        history = history.substr(0, history.length - 1);
+                    }
+                }
+                //if output is not empty history might be empty//
+                if (output != "" || history != "") {
+                    //conditional statement//
+                    output =
+                        output === "" ? output : reverseNumberFormat(output);
+                    if (history === "0") history = "";
+                    history = history + output;
+                    if (this.id == "=") {
+                        // the eval function is responsible for doing the basic maths
+                        let result = eval(history);
+                        printOutput(result);
+                        printHistory("");
+                    } else {
+                        history = history + this.id;
+                        printHistory(history);
+                        printOutput("");
+                    }
+                }
+            }
+        });
+    }
+}
+
+// call both functions
+getNumbers();
+operatorCalculation();
