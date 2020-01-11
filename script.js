@@ -23,3 +23,19 @@ function printOutput(num) {
         );
     }
 }
+//change from number to string
+// so it can have commas and also negative values
+function getFormattedNumber(num) {
+    if (num == "-") {
+        return "";
+    }
+    let n = Number(num);
+    let value = n.toLocaleString("en");
+    return value;
+}
+
+//Replace Number with comma with empty string
+// eg: 4,999 will be replaced to 4999
+function reverseNumberFormat(num) {
+    return Number(num.replace(/,/g, ""));
+}
