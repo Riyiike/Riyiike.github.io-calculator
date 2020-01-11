@@ -39,3 +39,19 @@ function getFormattedNumber(num) {
 function reverseNumberFormat(num) {
     return Number(num.replace(/,/g, ""));
 }
+// Get all numbers
+function getNumbers() {
+    let number = document.getElementsByClassName("number");
+    for (let i = 0; i < number.length; i++) {
+        //Add event listener to the numbers to listen for clicks
+        number[i].addEventListener("click", function() {
+            //get the number from the button clicks
+            let output = reverseNumberFormat(getOutput());
+            if (output != NaN) {
+                //if output is a number, then remove concatenation//
+                output = output + this.id;
+                printOutput(output);
+            }
+        });
+    }
+}
